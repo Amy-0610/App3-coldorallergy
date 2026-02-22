@@ -7,7 +7,7 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Amy Nguyen 
  
 Further Information:
 http://cns.utexas.edu/fri
@@ -17,11 +17,10 @@ Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
- 
+The goal of this code is to create an interactive symptom checker that helps users compare common cold and allergy symptoms. The person using the app answers 6 questions and the code tracks their responses using simple JavaScript. At the end, it calculates and displays the percentage of answers associated with either cold or allergies, hopefully helping the user visualize which condition their symptoms more closely match.
 Known Issues:
-blah, blah, blah, blah
-
+This program weighs all questions equally and does not consider symptom severity or duration beyond specific targeted questions provided. The percentages are based on 6 fixed questions, so modifying the number of questions would require updating the toal question variable in the script. The tool is intended for demonstration purposes only and is not medically understandable. 
+	
 https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
 -->
@@ -36,19 +35,30 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 
 
 <script>
-        var allergy_count = 0;
-        var cold_count = 0;
+		
+        var allergy_count = 0;// variable to store how many answers match allergy
+        var cold_count = 0; //variable to store how many answers match cold
 
-
+		// function that adds 1 to allergy_count
         function allergyAdd(){
-            allergy_count = allergy_count + 1;
-		alert(allergy_count);
+            allergy_count = allergy_count + 1; 
 
         }
 
         function coldAdd(){
-            cold_count = cold_count + 1;
+            cold_count = cold_count + 1; //function that adds 1 to cold_count
         }
+
+	//function that calculates percentages and prints results	
+	function showResults(){
+		var allergyPercent = (allergy_count / 6) * 100; //calculates percent for allergies
+		var coldPercent = (cold_count/6) * 100; //calculates percent for cold
+		var resultText = document.getElementById("results"); //gets paragraph where results will be printed
+		resultText.innerHTML = //changes content of paragraph
+			"Probability it is allergies = " + allergyPercent + "%<br>" +
+			"Probability it is a cold = " + coldPercent + "%";
+	}
+			
 
   </script>
 
@@ -89,30 +99,111 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
  	
 	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
-</div> <!-- adding this because it seems to be missing????? -->
+</div> 
 	
+<!-- QUESTION 1 -->
 <div class="page" id="one">
 	<div id="header" class="w3-container w3-flat-carrot">
 		<h1>Question 1</h1>
 	</div>
 	
     	<div id="content" class="w3-container">
-        <p>Put Question 1 content here.</p>    
+        <p>Are your eyes watery or itchy?</p>   
+
+		<a href="#two" onclick="allergyAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#two" onclick="coldAdd();" class= "w3-btn w3-black"> No </a>
+
     	</div>
 </div>
 
+<!-- QUESTION 2 -->
 <div class="page" id="two">
 	<div class="w3-container w3-flat-carrot">
 		<h1>Question 2</h1>
 	</div>
 	
 	<div id="content" class="w3-container">
-		<p>Content of page 2 goes here.</p>
+        <p>Do you have a fever?</p>   
+
+		<a href="#three" onclick="coldAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#three" onclick="allergyAdd();" class= "w3-btn w3-black"> No </a>
+
 	</div>
 </div>	
 
+<!-- QUESTION 3 -->
+<div class="page" id="three">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Do you have a sore throat?</p>   
+
+		<a href="#four" onclick="coldAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#four" onclick="allergyAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="page" id="four">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Are your symptoms seasonal or chronic?</p>   
+
+		<a href="#five" onclick="allergyAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#five" onclick="coldAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- QUESTION 5-->
+<div class="page" id="five">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Are you feeling sore in your joints or muscles?</p>   
+
+		<a href="#six" onclick="coldAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#six" onclick="allergyAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- QUESTION 6 -->
+<div class="page" id="six">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 6</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+        <p>Are your symptoms worse outdoors?</p>   
+
+		<a href="#results" onclick="allergyAdd();" class= "w3-btn w3-black"> Yes </a>
+		<a href="#results" onclick="coldAdd();" class= "w3-btn w3-black"> No </a>
+
+	</div>
+</div>
+
+<!-- RESULTS PAGE -->
+<div class="page" id="results">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Results</h1>
+	</div>
+
+	<div class="w3-container">
+		<p id="results"></p>
+	</div>
+</div>
+	
 <footer class="w3-bottom w3-container w3-flat-carrot">
-	<p>DIY!</p>
+	<p>DIY Diagnostics App 2026</p>
 </footer>
 
 </body>
